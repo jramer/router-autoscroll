@@ -1,11 +1,16 @@
 RouterAutoscroll = {
   animationDuration: 200,
-  marginTop: 0
+  marginTop: 0,
+  cancelNext: function() {
+    cancelNext = true;
+  }
 };
 
 var backToPosition;
 // Saved positions will survive a hot code push
 var scrollPositions = new ReactiveDict("okgrow-router-autoscroll");
+
+var cancelNext = false;
 
 // local variable for accessing jquery, if available
 var _jQuery = false;
@@ -36,6 +41,11 @@ function getScrollToPosition () {
 
   var id = window.location.hash.replace("#", '');
   var element;
+
+  if (cancelNext) {
+    cancelNext = false;
+    return undefined;
+  }
 
   // check if maintainScroll=1 exists
   if (id.indexOf('maintainScroll=1') > -1) {
