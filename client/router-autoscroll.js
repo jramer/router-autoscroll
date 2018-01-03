@@ -143,6 +143,11 @@ if (Package["meteorhacks:flow-router-ssr"]) {
   Package["meteorhacks:flow-router-ssr"].FlowRouter.triggers.exit([saveScrollPosition]);
 }
 
+if (Package['ostrio:flow-router-extra']) {
+  Package['ostrio:flow-router-extra'].FlowRouter.triggers.enter([flowScroll]);
+  Package['ostrio:flow-router-extra'].FlowRouter.triggers.exit([saveScrollPosition]);
+}
+
 HotCodePush.start.then(function () {
   var currentScroll = scrollTop();
   scrollPositions.set("HotCodePushScrollPosition", currentScroll);
